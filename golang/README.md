@@ -21,10 +21,8 @@ I,J,5
 G,J,20
 ```
 ## Development
-### Unit Tests
-- required `mocha` to be installed with `go dep`
 
-- Run Unit tests with below command
+### Unit Testing
 ```
-npm run test
+go test ./... -cover
 ```
