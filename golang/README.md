@@ -1,4 +1,4 @@
-# NodeJS - Find shortest station route
+# Go - Find shortest station route
 
 ## Usages
 ```
