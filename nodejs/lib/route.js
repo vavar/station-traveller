@@ -1,12 +1,14 @@
-const { readFileSync } = require('fs');
+const { readFileSync, existsSync } = require('fs');
 
-function createStation(existStation, destination, timeUsage) {
-    const station = existStation || { nextStations: {} };
-    station.nextStations[destination] = +timeUsage;
-    return station;
+function createStation(existStation = { nextStations: {} }, destination = '', timeUsage = '') {
+    existStation.nextStations[destination] = +timeUsage;
+    return existStation;
 }
 
 function parseRoutes(fileName) {
+    if (!fileName || !existsSync(fileName)) { 
+        return {};
+    }
     const routesMap = {};
     const data = readFileSync(fileName, 'utf8');
     data.toString().split('\n').forEach(line => {
@@ -20,7 +22,7 @@ function parseRoutes(fileName) {
     return routesMap;
 }
 
-function getTravelPath(routesMap, start, stop) {
+function getTravelPath(routesMap = {}, start = '', stop = '') {
 
     let routes = {};
     let visitStations = {};
@@ -54,7 +56,7 @@ function getTravelPath(routesMap, start, stop) {
     return routes;
 }
 
-function calculateRoute(routesMap, start, end) {
+function calculateRoute(routesMap = {}, start = '', end = '') {
     if (!routesMap[start]) {
         return `No routes from ${start} to ${end}`;
     }

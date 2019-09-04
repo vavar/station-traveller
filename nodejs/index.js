@@ -11,9 +11,9 @@ if (!routeConfig) {
 // Load route file
 const routeMap = parseRoutes(routeConfig);
 
-function validRouteStation(data) {
+function validRouteStation(routes = {}, data = '') {
     const inputNode = data.trim().toUpperCase();
-    return (routeMap[inputNode]) ? inputNode : null;
+    return (routes[inputNode]) ? inputNode : null;
 }
 
 // main 
@@ -41,7 +41,7 @@ stdin.on('data', function (data) {
     }
 
     if (startStation && endStation) {
-        stdout.write(calculateRoute(routeMap, startStation, endStation) + '\n');
+        stdout.write(`${calculateRoute(routeMap, startStation, endStation)}\n`);
         exit();
     }
 });
